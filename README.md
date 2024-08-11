@@ -1,11 +1,41 @@
 ### Setup
-- Publish config file - 
+- Clone this repo
     ```bash
-    php artisan vendor:publish --tag=logger-config
+    git clone git@github.com:mdtusersh/logger.git
     ```
-- Run migration
+- Navigating to the application's directory
     ```bash
-    php artisan migrate
+    cd logger
+    ```
+- Copy and rename (.env.example to .env)
+    ```bash
+    cp .env.example .env
+    ```
+- Install the application's dependencies
+    ```bash
+    docker run --rm \
+        -u "$(id -u):$(id -g)" \
+        -v "$(pwd):/var/www/html" \
+        -w /var/www/html \
+        laravelsail/php83-composer:latest \
+        composer install --ignore-platform-reqs
+    ```
+- Run sail
+    ```bash
+    ./vendor/bin/sail up
+    ```  
+- Generate secret key (sail should have running)
+    ```bash
+    sail artisan key:generate 
+    ```
+  
+- Publish config file (sail should have running)
+    ```bash
+    sail artisan vendor:publish --tag=logger-config
+    ```
+- Run migration (sail should have running)
+    ```bash
+    sail artisan migrate  
     ```
 
 ### Usage
@@ -38,14 +68,14 @@ Log mediums configure by config file -
 LOGGER_MEDIUM=stack
 LOGGER_STACK=text,json,stream,database
 ```
-- Possible value of log  ```LOGGER_MEDIUM``` 
+- Possible value of ```LOGGER_MEDIUM``` 
   - ```text```
   - ```json```
   - ```stream```
   - ```database```
   - ```stack```
-    - If ```stack``` is selected then all the value of ```LOGGER_STACK``` set as logger mediums.
+    - If ```stack``` is selected, then value of ```LOGGER_STACK``` set as logger medium.
     
 
-- Possible value of log  ```LOGGER_STACK``` 
-  - Comma separated log mediums name
+- Possible value of ```LOGGER_STACK``` 
+  - Comma separated log medium name.
