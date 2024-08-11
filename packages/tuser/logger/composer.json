@@ -1,0 +1,30 @@
+{
+    "name": "tuser/logger",
+    "type": "library",
+    "license": "MIT",
+    "version": "1.0.0",
+    "autoload": {
+        "psr-4": {
+            "Tuser\\Logger\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Md. Tuser Sheikh",
+            "email": "mdtusersh@gmail.com"
+        }
+    ],
+    "require": {
+        "laravel/framework": "^11.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Tuser\\Logger\\LoggerServiceProvider"
+            ],
+            "aliases": {
+                "Logger": "Tuser\\Logger\\Facades\\Logger"
+            }
+        }
+    }
+}
